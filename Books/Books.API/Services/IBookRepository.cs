@@ -8,6 +8,8 @@ namespace Books.API.Services
 {
     public interface IBookRepository
     {
+        IEnumerable<Book> GetBooks();
+
         Task<IEnumerable<Book>> GetBooksAsync();
 
         Task<Book> GetBookAsync(Guid id);

@@ -19,7 +19,14 @@ namespace Books.API.Services
 
         public async Task<Book> GetBookAsync(Guid id)
         {
+            await context.Database.ExecuteSqlInterpolatedAsync($"WAITFOR DELAY '00:00:02';");
             return await context.Books.Include(b => b.Author).FirstOrDefaultAsync(b => b.Id == id);
+        }
+
+        public IEnumerable<Book> GetBooks()
+        {
+            context.Database.ExecuteSqlInterpolated($"WAITFOR DELAY '00:00:02';");
+            return context.Books.Include(b => b.Author).ToList();
         }
 
         public async Task<IEnumerable<Book>> GetBooksAsync()
@@ -44,5 +51,7 @@ namespace Books.API.Services
                 }
             }
         }
+
+        
     }
 }
