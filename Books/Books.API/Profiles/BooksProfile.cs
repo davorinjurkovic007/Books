@@ -15,6 +15,8 @@ namespace Books.API.Profiles
                     dest => dest.Author,
                     opt => opt.MapFrom(
                         src => $"{src.Author.FirstName} {src.Author.LastName}"));
+
+            CreateMap<Models.BookForCreation, Entities.Book>();
         }
     }
 }
