@@ -34,6 +34,11 @@ namespace Books.API.Services
             return await context.Books.Include(b => b.Author).ToListAsync();
         }
 
+        public async Task<IEnumerable<Entities.Book>> GetBooksAsync(IEnumerable<Guid> bookIds)
+        {
+            return await context.Books.Where(b => bookIds.Contains(b.Id)).Include(b => b.Author).ToListAsync();
+        }
+
         public void AddBook(Book bookToAdd)
         {
             if(bookToAdd == null)
