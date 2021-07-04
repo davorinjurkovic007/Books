@@ -33,6 +33,7 @@ namespace Books.API
             var connectionString = Configuration["ConnectionStrings:BooksDBConnectionString"];
             services.AddDbContext<BookContext>(o => o.UseSqlServer(connectionString));
 
+            services.AddHttpClient();
             services.AddScoped<IBookRepository, BooksRepository>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
