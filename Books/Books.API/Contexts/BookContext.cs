@@ -79,6 +79,8 @@ namespace Books.API.Contexts
                     Title = "The Hitchhiker's Guide to the Galaxy",
                     Description = "In The Hitchhiker's Guide to the Galaxy, the characters visit the legendary planet Magrathea, home to the now-collapsed planet-building industry, and meet Slartibartfast, a planetary coastline designer who was responsible for the fjords of Norway. Through archival recordings, he relates the story of a race of hyper-intelligent pan-dimensional beings who built a computer named Deep Thought to calculate the Answer to the Ultimate Question of Life, the Universe, and Everything."
                 });
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
