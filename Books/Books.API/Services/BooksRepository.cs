@@ -60,6 +60,7 @@ namespace Books.API.Services
             logger.LogInformation($"ThreadId when entering GetBookAsync: " +
                     $"{System.Threading.Thread.CurrentThread.ManagedThreadId}");
 
+            // Awoid this call on the server. It is not optimized and will block. Used on WPF, XAML or client applications. 
             var bookPages = await GetBookPages();
 
             return await context.Books.Include(b => b.Author).ToListAsync();
@@ -135,9 +136,9 @@ namespace Books.API.Services
             {
                 return await Task.WhenAll(downloadBookCoverTasks);
             }
-            catch(OperationCanceledException ex)
+            catch(OperationCanceledException operationCancelException)
             {
-                logger.LogInformation($"{ex.Message}");
+                logger.LogInformation($"{operationCancelException.Message}");
                 foreach(var task in downloadBookCoverTasks)
                 {
                     logger.LogInformation($"Task {task.Id} has status {task.Status}");
@@ -145,8 +146,11 @@ namespace Books.API.Services
 
                 return new List<BookCover>();
             }
-
-            
+            catch(Exception exception)
+            {
+                logger.LogError($"{exception.Message}");
+                throw;
+            }
 
             //foreach(var bookCoverUrl in bookCoverUrls)
             //{
