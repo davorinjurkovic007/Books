@@ -74,7 +74,7 @@ namespace Books.API.Services
         {
             var httpClient = httpClientFactory.CreateClient();
             // pass through a dummy name
-            var reponse = await httpClient.GetAsync($"http://localhost:52644/api/bookcovers/{coverId}");
+            var reponse = await httpClient.GetAsync($"http://localhost:5000/api/bookcovers/{coverId}");
             if(reponse.IsSuccessStatusCode)
             {
                 return JsonSerializer.Deserialize<BookCover>(await reponse.Content.ReadAsStringAsync(),

@@ -42,12 +42,15 @@ namespace Books.API.Controllers
             {
                 return NotFound();
             }
-            
+
             //var bookCover = await booksRepository.GetBookCoverAsync("dummycover");
             var bookCovers = await booksRepository.GetBookCoversAsync(id);
 
             // old way of working
             //var propertyBag = new Tuple<Entities.Book, IEnumerable<ExternalModels.BookCover>>(bookEntity, bookCovers);
+            // How to get to the tupels options
+            //propertyBag.Item1;
+            //propertyBag.Item2;
 
             // From C# 7 this can be used
             //(Entities.Book book, IEnumerable<ExternalModels.BookCover> bookCovers) propertyBag = (bookEntity, bookCovers);
